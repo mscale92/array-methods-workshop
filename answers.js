@@ -38,4 +38,22 @@ getPos([-10,10,-5,5,4]);
 
 
 
-//
+//Exercise 2b, redo the first exercise with the filter method
+//as well as returning the filtered array by accessing the filter function
+
+function printPositives(array){
+    return array.filter(function(value){
+        return value >= 0
+        //only return values that are higher than, or are, zero
+    }).forEach(function(value){
+    //end of filter Start of forEach    
+        console.log(value);
+        //for each value, print the value
+    });
+    //end of forEach
+};
+//end of printPositives function
+printPositives([-1,2,-3,4,-6,5]);
+
+
+
