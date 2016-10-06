@@ -146,3 +146,72 @@ function highLow(array){
 //end highLow function
 
 highLow([1,10,5,0]);
+
+
+
+//Write a function that returns the highest and lowest values of an array
+//as well as the second highest and second lowest values as well with reduce
+function highLow2(array){
+    var ValueContainer = function(highest, secondHigh, lowest, secondLow){
+        this.highestNum = highest;
+        this.secondHighNum = secondHigh;
+        this.lowestNum = lowest;
+        this.secondLowNum = secondLow;
+    }
+    
+    var highest = array.reduce(function(higher, num){
+        if(num > higher){
+            return num;
+        }
+        else{
+            return higher;
+        }
+    }, -Infinity);
+    //end of highest reduce function
+    
+    var lowest = array.reduce(function(lower, num){
+        if(num < lower){
+            return num;
+        }
+        else{
+            return lower;
+        }
+    }, Infinity);
+    //end of lowest reduce function
+    
+    var secondHigh = array.reduce(function(secHigh, num){
+        if(num > secHigh && num < highest){
+            return num;
+        }
+        else{
+            return secHigh;
+        }
+    },-Infinity);
+    //end of secondHigh reduce function
+    //the second highest has to be higher than the others but must be lower than highest
+    //thus the variable highest is used in our if statement
+    
+    var secondLow = array.reduce(function(secLow, num){
+        if(num < secLow && num > lowest){
+            return num;
+        }
+        else{
+            return secLow;
+        }
+    }, Infinity);
+    //end of secondLow reduce function
+    //the second lowest must be lower than the others but bigger than the lowest
+    //so, like with the highest, we constrict our if statement with our lowest variable
+    
+    var totalValues = new ValueContainer(highest, secondHigh, lowest, secondLow);
+    //let's make a new object and shove our values into them all at once. 
+
+    
+    return totalValues;
+    //and return our completed list of all the highest, lowest, and 2nd highest, and 2nd lowest values.
+};
+//end of highLow2
+
+highLow2([1,2,3,4,5]);
+
+
