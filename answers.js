@@ -57,3 +57,32 @@ printPositives([-1,2,-3,4,-6,5]);
 
 
 
+//Use the reduce method to find the longest word in a string
+//Remember, reduce needs three parameters to work
+function longestWord(string){
+    string = string.split(' ');
+    //make string into an array with each word as an element
+    
+    //Below, don't forget to make your reduce function equal to something
+    //reduce returns a value and needs a place to spit it out, in this case thelongestWord
+    var thelongestWord = string.reduce(function(longest, currentWord){
+        if(currentWord.length > longest.length){
+            return currentWord;
+        }
+        else{
+            return longest;
+        }
+        
+    }, "");
+    //End of reduce function
+    //don't forget to have your reduce with a starting value
+    //since we're dealing with strings, an empty string works.
+    
+    return thelongestWord;
+    //return the value of out string.reduce function
+    
+};
+//end of longestWord function
+longestWord("Aside of programming at my PC");
+
+
