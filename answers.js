@@ -121,14 +121,24 @@ function highLow(array){
     //we have a container constructor that will hold our highest and lowest values
     
     var highest = array.reduce(function(higher, num){
-        
-    }, Infinity);
-    //highest reduce function
+        if(num > higher){
+            return num;
+        }
+        else{
+            return higher;
+        }
+    }, -Infinity);
+    //highest reduce function, always higher than -infinity
     
     var lowest = array.reduce(function(lower, num){
-        
-    }, -Infinity);
-    //lowest reduce function
+        if(num < lower){
+            return num;
+        }
+        else{
+            return lower;
+        }
+    }, Infinity);
+    //lowest reduce function, always less than infinity
     
     var valuesHL = new Container(highest,lowest);
     return valuesHL;
