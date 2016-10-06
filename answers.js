@@ -108,3 +108,31 @@ function countVow(string){
 //end of countVow function
 
 countVow("hello darling");
+
+
+
+//Write a function called high low that takes an array of numbers
+//and returns and object with the highest and lowest values via reduce
+function highLow(array){
+    var Container = function(high,low){
+        this.highest = high;
+        this.lowest = low;
+    }
+    //we have a container constructor that will hold our highest and lowest values
+    
+    var highest = array.reduce(function(higher, num){
+        
+    }, Infinity);
+    //highest reduce function
+    
+    var lowest = array.reduce(function(lower, num){
+        
+    }, -Infinity);
+    //lowest reduce function
+    
+    var valuesHL = new Container(highest,lowest);
+    return valuesHL;
+};
+//end highLow function
+
+highLow([1,10,5,0]);
