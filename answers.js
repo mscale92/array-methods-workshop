@@ -86,3 +86,25 @@ function longestWord(string){
 longestWord("Aside of programming at my PC");
 
 
+
+//Count vowels function with the reduce method
+function countVow(string){
+    string = string.split('');
+
+    var vowArray = ["a","e","i","o","u"];
+    var vowelCount = string.reduce(function(totalVow, letters){
+        
+        if(vowArray.indexOf(letters) >= 0){
+            return totalVow + 1;
+        }
+        else{
+            return totalVow;
+        }
+    
+    }, 0);
+    
+    return vowelCount;
+};
+//end of countVow function
+
+countVow("hello darling");
