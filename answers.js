@@ -271,3 +271,118 @@ console.log(container);
 };
 
 countChars("helloll");
+
+
+
+//Making an Index of people
+
+function idGen(){
+    var idSize = [0,1,2,3,4,5];
+        //here is an array with a length of 6.
+    var alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ".split('');
+    var digits = "0123456789".split('');
+        //here I made two different arrays from strings using the split method
+        //one hold all twenty-six letters to the alphabet, the other all ten digits
+    
+    var id = idSize.reduce(function(array,value){
+        if(typeof value === false || typeof value !== "number"){
+            value = idSize.indexOf(value);
+            //this is just to ensure that our code will still run even if someone
+            //has messed with our ID size array
+            //if the value is false or the value of out element is not a number,
+            //then value takes on the number of its position as its value, solved.
+            
+            if(value % 2 === 0 ){
+                value = Math.floor(Math.random() * alphabet.length);
+                var letter = alphabet[value];
+                array.push(letter);
+                return array;
+            }
+            
+            else{
+                value = Math.floor(Math.random() * digits.length);
+                var number = digits[value];
+                array.push(number);
+                return array;
+            }
+
+        }
+        //this is the end of our error checking if statement
+
+        else if(value % 2 === 0 ){
+            value = Math.floor(Math.random() * alphabet.length);
+            var letter = alphabet[value];
+            array.push(letter);
+            return array;
+        }
+        //the if assigns letters to the id
+        //the .length is key since it grabs a random number between, and including, zero
+        //and the length of the array, not including the length of the array.
+        //floor rounds down to the nearest integer
+
+        else{
+            value = Math.floor(Math.random() * digits.length);
+            var number = digits[value];
+            array.push(number);
+            return array;
+        }
+        //the else has all elements that have a modulo of 2 that is not zero,
+        //so all odd numbers ;)
+        //the value takes a random number
+        //the digits array uses the random number value to select one of its elements
+        //our empty array then pushes the element number from digits
+        //finally we return our array
+
+    }, []);
+    
+    return id;
+};
+//end of idGen
+
+
+var people = [];
+//here's an empty array that we will store our people information
+
+function Person(id, first, last, email){
+    this.id = id;
+    this.firstName = first;
+    this.lastName = last;
+    this.email = email;
+};
+//a Person constructor is used to create new objects that will fill the people array
+//but, a constructor needs a value that it uses as a name in order to name and separate new objects. Can't have unknown objects on the loose!
+//so...we're going to use the array positions of the empty array to name the objects whilst dumping the object info into each position.
+
+
+//Reduce to the rescue!
+function addPerson(firstName, lastName, email){
+// console.log(people[0] = new Person(0, firstName, lastName, email));
+    var count = people.reduce(function(position,element){
+        if(false){
+            return position;
+        }
+        else if(typeof element === "object"){
+            return position += 1;
+        }
+    }, 0);
+    //this reduce function takes our empty array's element, as element, and if falsy, in this case
+    //null, it will output position, position starting at the value of zero
+    
+    //in order to prevent our people from being overridden accidentally, we have an else if
+    //that sees if the element is an object
+    //if there is an object there, position adds one to its value and is returned
+    //override denied!
+    
+
+    people[count] = new Person(idGen(),firstName, lastName, email);
+    return people;
+    //here, our new Person objects take the name of person[count], count being our value
+    //from our reduce function above.
+    //thanks to our reduce function, no person will have their spot taken, the array can store
+    //them all!
+    //yay!!!
+};
+
+addPerson("Mary", "Scale", "scalemary@gmail.com");
+addPerson("Mickey", "Mouse", "mm@gmail.com");
+addPerson("Mary", "Addams", "maddams@gmail.com");
