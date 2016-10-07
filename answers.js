@@ -215,3 +215,59 @@ function highLow2(array){
 highLow2([1,2,3,4,5]);
 
 
+//Write a function that takes a string and counts the strings characters and
+//spits out an object with the letters and the count of each letter
+//If a string has the same letter more than once, the count should adjust accordingly
+
+function countChars(string){
+    var container = {
+    };
+    //an empty Object to store our info in.
+    
+    string = string.split(''); 
+    //our string becomes an array
+
+    var createKeyCopy = string.forEach(function(letter){
+        return container[letter] = 0;
+    });
+    //end of forEach function createKeyCopy
+    //This creates a key of each letter for the container.
+    //any double letters are overridden by each other.
+    
+    console.log(container);
+    
+
+    var counted = string.reduce(function(match, letter, i){
+        if(letter !== string[i]){
+            match = letter; 
+        }
+        else{
+            container[letter] += 1;
+            return;
+        }
+    }, "");
+    //end of reduce counted function
+    //this reduce function requires i, increment, in order to work
+    //when a reduce method returns a value, it shifts to the next element in the array
+    //in this case, the next letter
+    //in order to loop the array before shifting, i is required
+    //i represents the intervals of the reduce function, the max is the length of the array
+    //the current value, match, the slot in which reduce holds a value
+    
+    //If the letter that is accessed does not equal the element in position i of the same array,
+    //then match, the current value, equals the accessed letter.
+    //Nothing is returned
+    //the current value is tested in place of the array element until there is a return.
+    
+    //If the current value does match the element in position i,
+    //then the container object takes the letter's value, an array string, as a key
+    //so that the container can access the key slot of the same name.
+    //It then adds 1 by using the += comparison, aka x =+ y same as x = x + y
+    //finally the letter is returned allowing reduce to switch to the next array element,
+    //the next letter.
+
+console.log(container);
+  
+};
+
+countChars("helloll");
