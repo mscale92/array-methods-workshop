@@ -277,8 +277,8 @@ countChars("helloll");
 //Making an Index of people
 
 function idGen(){
-    var idSize = [0,1,2,3,4,5];
-        //here is an array with a length of 6.
+    var idSize = [0,1,2,"",4,5,6];
+        //here is an array with a length of 7.
     var alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ".split('');
     var digits = "0123456789".split('');
         //here I made two different arrays from strings using the split method
@@ -291,20 +291,7 @@ function idGen(){
             //has messed with our ID size array
             //if the value is false or the value of out element is not a number,
             //then value takes on the number of its position as its value, solved.
-            
-            if(value % 2 === 0 ){
-                value = Math.floor(Math.random() * alphabet.length);
-                var letter = alphabet[value];
-                array.push(letter);
-                return array;
-            }
-            
-            else{
-                value = Math.floor(Math.random() * digits.length);
-                var number = digits[value];
-                array.push(number);
-                return array;
-            }
+            return array;
 
         }
         //this is the end of our error checking if statement
@@ -386,3 +373,11 @@ function addPerson(firstName, lastName, email){
 addPerson("Mary", "Scale", "scalemary@gmail.com");
 addPerson("Mickey", "Mouse", "mm@gmail.com");
 addPerson("Mary", "Addams", "maddams@gmail.com");
+addPerson("Blaise", "Adams", "blaise.jameson@gmail.com")
+
+var peopleById = people.reduce(function(object,person,idx){
+  object[people[idx].id.join('')] = person;
+  return object;
+}, {});
+
+console.log(peopleById);
