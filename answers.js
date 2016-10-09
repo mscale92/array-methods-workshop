@@ -381,3 +381,79 @@ var peopleById = people.reduce(function(object,person,idx){
 }, {});
 
 console.log(peopleById);
+
+
+
+//Create a new index of people by first name where each name contains an array
+//of the people with the same first name
+
+function Person(id, first, last, email){
+  this.id = id;
+  this.firstName = first;
+  this.lastName = last;
+  this.emailAddress = email;
+}
+
+var people = [];
+
+function addPeople(id, first, last, email){
+  
+  var orderInArray = people.reduce(function(position, element){
+    if(element === false){
+      return position
+    }
+    else{
+      return position += 1;
+    }
+  }, 0);
+  
+  people[orderInArray] = new Person(id, first, last, email);
+  return people;
+};
+//end of addPeople function
+
+addPeople(12345,"Mary", "Scale", "ms@gmail.com");
+addPeople(45678, "Blaise", "Adams", "ba@gmail.com");
+addPeople(90123, "Mary", "Addams", "maddams@gmail.com");
+addPeople(54123, "Mary", "Contrary", "mq@gmail.com");
+addPeople(78945, "Blaise", "Saint", "bs@gmail.com")
+
+
+function peopleByFirstName(array){
+    return array.reduce(function(object, peps){
+        if(typeof object[peps.firstName] === "object"){
+            var doubles = object[peps.firstName];
+            // console.log("red");        
+            var position = doubles.length;
+            doubles[position] = peps;
+            object[peps.firstName] = doubles;
+            return object;
+        }
+        //This if statement checks whether or not the key of object[peps.firstName] exists
+        //by asking if there is a typeof object present. Arrays are objects and if present will
+        //return true.
+
+        //In order to add another object to the array, we need a copy of our array that is within our
+        //old empty object called object. Note, container is a better word for our parameter
+
+        //doubles is our copy of our existing array within the object
+        //we then use a position variable that takes the length of our array
+        //this gives us a position to put our new data into, push unfortunately returns 
+        //the length of the array so it is not ideal to use.
+
+        //then we make our object[peps.firstName] equal to the value of our new doubles array
+        //return the new object
+
+        else{
+            object[peps.firstName] = [peps];
+            // console.log("green");
+            return object;
+        }
+        //if an object/array does not exist yet, the object must make an array with our peps data inside
+        //return the new object with a new key and value.
+    }, {});
+    //end of reduce function that adds new objects with arrays of data that contain duplicate first names.
+};
+//end of peopleByFirstName function
+
+console.log(peopleByFirstName(people));
